@@ -1,22 +1,100 @@
 #include <MyoController.h>
 
-#define FIST_PIN 13
-#define WAVEIN_PIN 13
-#define WAVEOUT_PIN 13
-#define FINGERSSPREAD_PIN 13
-#define DOUBLETAP_PIN 13
+
+int one = 13;
+int two = 12;
+int three = 11;
+int four = 10;
+int five = 9;
+int six = 8;
+int seven = 7;
+int twelve = 6;
 
 MyoController myo = MyoController();
 
 void setup() {
 
-  pinMode(FIST_PIN, OUTPUT);
-  pinMode(WAVEIN_PIN, OUTPUT);
-  pinMode(WAVEOUT_PIN, OUTPUT);
-  pinMode(FINGERSSPREAD_PIN, OUTPUT);
-  pinMode(DOUBLETAP_PIN, OUTPUT);
+  pinMode(one, OUTPUT);
+  pinMode(two, OUTPUT);
+  pinMode(three, OUTPUT);
+  pinMode(four, OUTPUT);
+  pinMode(five, OUTPUT);
+  pinMode(six, OUTPUT);
+  pinMode(seven, OUTPUT);
+  pinMode(twelve, OUTPUT);
   
   myo.initMyo();
+}
+
+void left() {
+  digitalWrite(one, HIGH);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(two, LOW);
+  digitalWrite(three, HIGH);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(four, HIGH);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(five, HIGH);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(six, LOW);
+  digitalWrite(seven, HIGH);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(twelve, LOW);
+  delay(100);
+  digitalWrite(one, HIGH);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(two, LOW);
+  digitalWrite(three, HIGH);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(four, HIGH);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(five, LOW);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(six, HIGH);
+  digitalWrite(seven, HIGH);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(twelve, LOW);
+  delay(100);    
+  digitalWrite(one, LOW);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(two, LOW);
+  digitalWrite(three, HIGH);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(four, LOW);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(five, HIGH);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(six, HIGH);
+  digitalWrite(seven, HIGH);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(twelve, LOW);
+  delay(100);    
+  digitalWrite(one, HIGH);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(two, LOW);
+  digitalWrite(three, LOW);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(four, HIGH);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(five, HIGH);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(six, HIGH);
+  digitalWrite(seven, HIGH);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(twelve, LOW);
+  delay(100);
+  digitalWrite(one, HIGH);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(two, LOW);
+  digitalWrite(three, HIGH);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(four, HIGH);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(five, HIGH);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(six, HIGH);
+  digitalWrite(seven, HIGH);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(twelve, LOW);
+  delay(500);
+  wipe();  
+ }
+
+ void brake(){
+  digitalWrite(one, HIGH);
+  digitalWrite(two, HIGH);
+  digitalWrite(three, HIGH);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(four, HIGH);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(five, HIGH);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(six, HIGH);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(seven, LOW);
+  digitalWrite(twelve, LOW);  
+}
+
+void wipe(){
+  digitalWrite(one, LOW);
+  digitalWrite(two, LOW);
+  digitalWrite(three, LOW);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(four, LOW);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(five, LOW);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(six, LOW);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(seven, LOW);
+  digitalWrite(twelve, LOW);
 }
 
 void loop()
@@ -25,26 +103,22 @@ void loop()
    myo.updatePose();
    switch ( myo.getCurrentPose() ) {
     case rest:
-      digitalWrite(FIST_PIN,LOW); 
-      digitalWrite(WAVEIN_PIN,LOW);
-      digitalWrite(WAVEOUT_PIN,LOW);
-      digitalWrite(FINGERSSPREAD_PIN,LOW);
-      digitalWrite(DOUBLETAP_PIN,LOW);
+      wipe();
       break;
     case fist:
-      digitalWrite(FIST_PIN,HIGH);
+      brake();
       break;
     case waveIn:
-      digitalWrite(WAVEIN_PIN,HIGH);
+      //digitalWrite(WAVEIN_PIN,HIGH);
       break;
     case waveOut:
-      digitalWrite(WAVEOUT_PIN,HIGH);
+      //digitalWrite(WAVEOUT_PIN,HIGH);
       break;
     case fingersSpread:
-      digitalWrite(FINGERSSPREAD_PIN,HIGH);
+      left();
       break;
     case doubleTap:
-      digitalWrite(DOUBLETAP_PIN,HIGH);
+      //digitalWrite(DOUBLETAP_PIN,HIGH);
       break;
    } 
    delay(100);
